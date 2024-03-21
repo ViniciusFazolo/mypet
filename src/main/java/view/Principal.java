@@ -31,21 +31,24 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         painelPrincipal = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         menu = new javax.swing.JMenuBar();
-        menuArquivo = new javax.swing.JMenu();
+        menuCliente = new javax.swing.JMenu();
         cadastrarCliente = new javax.swing.JMenuItem();
-        cadastrarProduto = new javax.swing.JMenuItem();
+        listarCliente = new javax.swing.JMenuItem();
         realizarVenda = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        menuProduto = new javax.swing.JMenu();
+        cadastrarProduto = new javax.swing.JMenuItem();
+        listarProduto = new javax.swing.JMenuItem();
+        menuAnimal = new javax.swing.JMenu();
+        cadastrarAnimal = new javax.swing.JMenuItem();
+        listarAnimal = new javax.swing.JMenuItem();
+        sair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MyPet - Página Inicial");
 
         painelPrincipal.setBackground(new java.awt.Color(50, 175, 181));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cachorro.png"))); // NOI18N
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo_size_invert.jpg"))); // NOI18N
@@ -55,28 +58,24 @@ public class Principal extends javax.swing.JFrame {
         painelPrincipalLayout.setHorizontalGroup(
             painelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelPrincipalLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
-            .addGroup(painelPrincipalLayout.createSequentialGroup()
-                .addGap(310, 310, 310)
+                .addContainerGap(310, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addContainerGap(310, Short.MAX_VALUE))
         );
         painelPrincipalLayout.setVerticalGroup(
             painelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPrincipalLayout.createSequentialGroup()
-                .addContainerGap(182, Short.MAX_VALUE)
+                .addContainerGap(211, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(41, 41, 41)
-                .addComponent(jLabel1))
+                .addGap(236, 236, 236))
         );
 
-        menuArquivo.setMnemonic('a');
-        menuArquivo.setText("Arquivo");
-        menuArquivo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        menuCliente.setMnemonic('c');
+        menuCliente.setText("Cliente");
+        menuCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         cadastrarCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        cadastrarCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cadastrarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cadastrarcliente.png"))); // NOI18N
         cadastrarCliente.setText("Cadastrar Cliente");
         cadastrarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -84,9 +83,33 @@ public class Principal extends javax.swing.JFrame {
                 cadastrarClienteActionPerformed(evt);
             }
         });
-        menuArquivo.add(cadastrarCliente);
+        menuCliente.add(cadastrarCliente);
 
-        cadastrarProduto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        listarCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        listarCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        listarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/listar.png"))); // NOI18N
+        listarCliente.setText("Listar Clientes");
+        listarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listarClienteActionPerformed(evt);
+            }
+        });
+        menuCliente.add(listarCliente);
+
+        realizarVenda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        realizarVenda.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        realizarVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/venda.png"))); // NOI18N
+        realizarVenda.setText("Realizar Venda");
+        menuCliente.add(realizarVenda);
+
+        menu.add(menuCliente);
+
+        menuProduto.setMnemonic('p');
+        menuProduto.setText("Produto");
+        menuProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        cadastrarProduto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        cadastrarProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cadastrarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/produto.png"))); // NOI18N
         cadastrarProduto.setText("Cadastrar Produto");
         cadastrarProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -94,19 +117,53 @@ public class Principal extends javax.swing.JFrame {
                 cadastrarProdutoActionPerformed(evt);
             }
         });
-        menuArquivo.add(cadastrarProduto);
+        menuProduto.add(cadastrarProduto);
 
-        realizarVenda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        realizarVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/venda.png"))); // NOI18N
-        realizarVenda.setText("Realizar Venda");
-        menuArquivo.add(realizarVenda);
+        listarProduto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        listarProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        listarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/listar.png"))); // NOI18N
+        listarProduto.setText("Listar Produtos");
+        listarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listarProdutoActionPerformed(evt);
+            }
+        });
+        menuProduto.add(listarProduto);
 
-        menu.add(menuArquivo);
+        menu.add(menuProduto);
 
-        jMenu2.setMnemonic('s');
-        jMenu2.setText("Sair");
-        jMenu2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        menu.add(jMenu2);
+        menuAnimal.setMnemonic('a');
+        menuAnimal.setText("Animal");
+        menuAnimal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        cadastrarAnimal.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        cadastrarAnimal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cadastrarAnimal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cachorro.png"))); // NOI18N
+        cadastrarAnimal.setText("Cadastrar Animal");
+        cadastrarAnimal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarAnimalActionPerformed(evt);
+            }
+        });
+        menuAnimal.add(cadastrarAnimal);
+
+        listarAnimal.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        listarAnimal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        listarAnimal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/listar.png"))); // NOI18N
+        listarAnimal.setText("Listar Animais");
+        listarAnimal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listarAnimalActionPerformed(evt);
+            }
+        });
+        menuAnimal.add(listarAnimal);
+
+        menu.add(menuAnimal);
+
+        sair.setMnemonic('s');
+        sair.setText("Sair");
+        sair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        menu.add(sair);
 
         setJMenuBar(menu);
 
@@ -131,6 +188,22 @@ public class Principal extends javax.swing.JFrame {
     private void cadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarProdutoActionPerformed
         ViewController.getMyInstance().abrirCadProduto();
     }//GEN-LAST:event_cadastrarProdutoActionPerformed
+
+    private void listarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listarClienteActionPerformed
+
+    private void cadastrarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarAnimalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cadastrarAnimalActionPerformed
+
+    private void listarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarAnimalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listarAnimalActionPerformed
+
+    private void listarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listarProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,14 +242,19 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem cadastrarAnimal;
     private javax.swing.JMenuItem cadastrarCliente;
     private javax.swing.JMenuItem cadastrarProduto;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuItem listarAnimal;
+    private javax.swing.JMenuItem listarCliente;
+    private javax.swing.JMenuItem listarProduto;
     private javax.swing.JMenuBar menu;
-    private javax.swing.JMenu menuArquivo;
+    private javax.swing.JMenu menuAnimal;
+    private javax.swing.JMenu menuCliente;
+    private javax.swing.JMenu menuProduto;
     private javax.swing.JPanel painelPrincipal;
     private javax.swing.JMenuItem realizarVenda;
+    private javax.swing.JMenu sair;
     // End of variables declaration//GEN-END:variables
 }
