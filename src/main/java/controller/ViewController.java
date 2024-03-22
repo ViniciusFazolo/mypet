@@ -8,8 +8,12 @@ import java.awt.Frame;
 import java.lang.reflect.InvocationTargetException;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import view.CadastrarAnimal;
 import view.CadastrarCliente;
 import view.CadastrarProduto;
+import view.ListaAnimal;
+import view.ListaPessoa;
+import view.ListaProduto;
 import view.Principal;
 
 public class ViewController {
@@ -17,6 +21,10 @@ public class ViewController {
     private Principal principal = null;
     private CadastrarCliente cadCli = null;
     private CadastrarProduto cadprod = null;
+    private CadastrarAnimal cadAnimal = null;
+    private ListaPessoa listPessoa = null;
+    private ListaAnimal listAnimal = null;
+    private ListaProduto listProduto = null;
     
 //    Singleton
     private static ViewController myInstance = new ViewController();
@@ -54,6 +62,22 @@ public class ViewController {
     
     public void abrirCadProduto() {
         cadprod = (CadastrarProduto) abrirJanela(principal, cadprod, CadastrarProduto.class);
+    }
+    
+    public void abrirCadAnimal() {
+        cadAnimal = (CadastrarAnimal) abrirJanela(principal, cadAnimal, CadastrarAnimal.class);
+    }
+    
+    public void abrirListaPessoa() {
+        listPessoa = (ListaPessoa) abrirJanela(principal, listPessoa, ListaPessoa.class);
+    }
+    
+    public void abrirListaAnimal() {
+        listAnimal = (ListaAnimal) abrirJanela(principal, listAnimal, ListaAnimal.class);
+    }
+    
+    public void abrirListaProduto() {
+        listProduto = (ListaProduto) abrirJanela(principal, listProduto, ListaProduto.class);
     }
 
     public static void main(String[] args) {

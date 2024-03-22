@@ -8,15 +8,14 @@ package view;
  *
  * @author vinicius
  */
-public class CadastrarCliente extends javax.swing.JDialog {
+public class CadastrarAnimal extends javax.swing.JDialog {
 
     /**
      * Creates new form CadastrarCliente
      */
-    public CadastrarCliente(java.awt.Frame parent, boolean modal) {
+    public CadastrarAnimal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
     }
 
     /**
@@ -33,17 +32,19 @@ public class CadastrarCliente extends javax.swing.JDialog {
         btnFechar = new javax.swing.JButton();
         btnSalvar1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        txtCliente = new javax.swing.JTextField();
+        txtAnimal = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtCpf = new javax.swing.JTextField();
+        txtRegistro = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jcomboDono = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        txtCelular = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
+        jcheckTemRegistro = new javax.swing.JCheckBox();
+        jLabel6 = new javax.swing.JLabel();
+        jcomboRaça = new javax.swing.JComboBox<>();
         logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("MyPet - Cadastrar Cliente");
+        setTitle("MyPet - Cadastrar Animal");
 
         painelForm.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -63,13 +64,21 @@ public class CadastrarCliente extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setText("Nome do Cliente");
+        jLabel1.setText("Nome do Animal");
 
-        jLabel2.setText("CPF");
+        jLabel2.setText("Registro do Animal");
 
-        jLabel3.setText("Celular");
+        jLabel5.setText("Dono");
 
-        jLabel4.setText("Email");
+        jcomboDono.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vinicius", "Pedro" }));
+
+        jLabel3.setText("Não possui registro?");
+
+        jcheckTemRegistro.setText("Não consta");
+
+        jLabel6.setText("Raça");
+
+        jcomboRaça.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vinicius", "Pedro" }));
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo_size.jpg"))); // NOI18N
         logo.setOpaque(true);
@@ -80,10 +89,10 @@ public class CadastrarCliente extends javax.swing.JDialog {
             painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelFormLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
+                .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jcomboRaça, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
                     .addComponent(jLabel1)
                     .addGroup(painelFormLayout.createSequentialGroup()
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -91,10 +100,16 @@ public class CadastrarCliente extends javax.swing.JDialog {
                         .addComponent(btnSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtCelular, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                    .addComponent(txtCpf)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                    .addComponent(txtCliente))
+                    .addComponent(txtAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcomboDono, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(painelFormLayout.createSequentialGroup()
+                        .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jcheckTemRegistro))))
                 .addContainerGap(452, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelFormLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -112,20 +127,24 @@ public class CadastrarCliente extends javax.swing.JDialog {
                 .addGap(54, 54, 54)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(jLabel2)
+                .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcheckTemRegistro))
                 .addGap(30, 30, 30)
-                .addComponent(jLabel3)
+                .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcomboDono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(jLabel4)
+                .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(jcomboRaça, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -170,14 +189,18 @@ public class CadastrarCliente extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarAnimal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarAnimal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarAnimal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastrarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastrarAnimal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -186,7 +209,7 @@ public class CadastrarCliente extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                CadastrarCliente dialog = new CadastrarCliente(new javax.swing.JFrame(), true);
+                CadastrarAnimal dialog = new CadastrarAnimal(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -205,12 +228,14 @@ public class CadastrarCliente extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JCheckBox jcheckTemRegistro;
+    private javax.swing.JComboBox<String> jcomboDono;
+    private javax.swing.JComboBox<String> jcomboRaça;
     private javax.swing.JLabel logo;
     public javax.swing.JPanel painelForm;
-    private javax.swing.JTextField txtCelular;
-    private javax.swing.JTextField txtCliente;
-    private javax.swing.JTextField txtCpf;
-    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtAnimal;
+    private javax.swing.JTextField txtRegistro;
     // End of variables declaration//GEN-END:variables
 }
