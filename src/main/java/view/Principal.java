@@ -67,7 +67,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPrincipalLayout.createSequentialGroup()
                 .addContainerGap(211, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(236, 236, 236))
+                .addContainerGap(236, Short.MAX_VALUE))
         );
 
         menuCliente.setMnemonic('c');
@@ -190,19 +190,19 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cadastrarProdutoActionPerformed
 
     private void listarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarClienteActionPerformed
-        // TODO add your handling code here:
+        ViewController.getMyInstance().abrirListaPessoa();
     }//GEN-LAST:event_listarClienteActionPerformed
 
     private void cadastrarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarAnimalActionPerformed
-        // TODO add your handling code here:
+        ViewController.getMyInstance().abrirCadAnimal();
     }//GEN-LAST:event_cadastrarAnimalActionPerformed
 
     private void listarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarAnimalActionPerformed
-        // TODO add your handling code here:
+        ViewController.getMyInstance().abrirListaAnimal();
     }//GEN-LAST:event_listarAnimalActionPerformed
 
     private void listarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarProdutoActionPerformed
-        // TODO add your handling code here:
+        ViewController.getMyInstance().abrirListaProduto();
     }//GEN-LAST:event_listarProdutoActionPerformed
 
     /**
