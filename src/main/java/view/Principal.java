@@ -43,7 +43,6 @@ public class Principal extends javax.swing.JFrame {
         menuAnimal = new javax.swing.JMenu();
         cadastrarAnimal = new javax.swing.JMenuItem();
         listarAnimal = new javax.swing.JMenuItem();
-        sair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MyPet - Página Inicial");
@@ -100,6 +99,11 @@ public class Principal extends javax.swing.JFrame {
         realizarVenda.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         realizarVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/venda.png"))); // NOI18N
         realizarVenda.setText("Realizar Venda");
+        realizarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                realizarVendaActionPerformed(evt);
+            }
+        });
         menuCliente.add(realizarVenda);
 
         menu.add(menuCliente);
@@ -160,11 +164,6 @@ public class Principal extends javax.swing.JFrame {
 
         menu.add(menuAnimal);
 
-        sair.setMnemonic('s');
-        sair.setText("Sair");
-        sair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        menu.add(sair);
-
         setJMenuBar(menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -204,6 +203,10 @@ public class Principal extends javax.swing.JFrame {
     private void listarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarProdutoActionPerformed
         ViewController.getMyInstance().abrirListaProduto();
     }//GEN-LAST:event_listarProdutoActionPerformed
+
+    private void realizarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarVendaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_realizarVendaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -255,6 +258,5 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu menuProduto;
     private javax.swing.JPanel painelPrincipal;
     private javax.swing.JMenuItem realizarVenda;
-    private javax.swing.JMenu sair;
     // End of variables declaration//GEN-END:variables
 }
