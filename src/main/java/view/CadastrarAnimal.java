@@ -37,8 +37,6 @@ public class CadastrarAnimal extends javax.swing.JDialog {
         txtRegistro = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jcomboDono = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jcheckTemRegistro = new javax.swing.JCheckBox();
         jLabel6 = new javax.swing.JLabel();
         jcomboRaça = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
@@ -73,10 +71,6 @@ public class CadastrarAnimal extends javax.swing.JDialog {
 
         jcomboDono.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vinicius", "Pedro" }));
 
-        jLabel3.setText("Não possui registro?");
-
-        jcheckTemRegistro.setText("Não consta");
-
         jLabel6.setText("Raça");
 
         jcomboRaça.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vinicius", "Pedro" }));
@@ -110,14 +104,9 @@ public class CadastrarAnimal extends javax.swing.JDialog {
                                 .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jcomboDono, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(painelFormLayout.createSequentialGroup()
-                                .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))
-                                .addGap(18, 18, 18)
-                                .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jcheckTemRegistro))))
+                            .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20))))
@@ -141,13 +130,9 @@ public class CadastrarAnimal extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcheckTemRegistro))
+                .addComponent(txtRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -237,12 +222,10 @@ public class CadastrarAnimal extends javax.swing.JDialog {
     private javax.swing.JButton btnSalvar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JCheckBox jcheckTemRegistro;
     private javax.swing.JComboBox<String> jcomboDono;
     private javax.swing.JComboBox<String> jcomboRaça;
     public javax.swing.JPanel painelForm;

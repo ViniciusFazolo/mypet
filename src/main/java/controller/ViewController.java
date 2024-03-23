@@ -15,6 +15,7 @@ import view.ListaAnimal;
 import view.ListaPessoa;
 import view.ListaProduto;
 import view.Principal;
+import view.RealizaVenda;
 
 public class ViewController {
     
@@ -25,6 +26,7 @@ public class ViewController {
     private ListaPessoa listPessoa = null;
     private ListaAnimal listAnimal = null;
     private ListaProduto listProduto = null;
+    private RealizaVenda realizaVenda = null;
     
 //    Singleton
     private static ViewController myInstance = new ViewController();
@@ -78,6 +80,10 @@ public class ViewController {
     
     public void abrirListaProduto() {
         listProduto = (ListaProduto) abrirJanela(principal, listProduto, ListaProduto.class);
+    }
+    
+    public void realizarVenda() {
+        realizaVenda = (RealizaVenda) abrirJanela(principal, realizaVenda, RealizaVenda.class);
     }
 
     public static void main(String[] args) {

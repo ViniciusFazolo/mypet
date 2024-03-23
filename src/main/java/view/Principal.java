@@ -205,7 +205,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_listarProdutoActionPerformed
 
     private void realizarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarVendaActionPerformed
-        // TODO add your handling code here:
+        ViewController.getMyInstance().realizarVenda();
     }//GEN-LAST:event_realizarVendaActionPerformed
 
     /**
