@@ -35,8 +35,6 @@ public class CadastrarAnimal extends javax.swing.JDialog {
         txtAnimal = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtRegistro = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jcomboDono = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jcomboRaça = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
@@ -67,11 +65,7 @@ public class CadastrarAnimal extends javax.swing.JDialog {
 
         jLabel2.setText("Registro do Animal");
 
-        jLabel5.setText("Dono");
-
-        jcomboDono.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vinicius", "Pedro" }));
-
-        jLabel6.setText("Raça");
+        jLabel6.setText("Categoria");
 
         jcomboRaça.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vinicius", "Pedro" }));
 
@@ -94,7 +88,6 @@ public class CadastrarAnimal extends javax.swing.JDialog {
                         .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jcomboRaça, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
                             .addComponent(jLabel1)
                             .addGroup(painelFormLayout.createSequentialGroup()
                                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -103,10 +96,8 @@ public class CadastrarAnimal extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcomboDono, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2)))
+                            .addComponent(txtRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20))))
@@ -129,19 +120,15 @@ public class CadastrarAnimal extends javax.swing.JDialog {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jcomboDono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jcomboRaça, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(216, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -223,10 +210,8 @@ public class CadastrarAnimal extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JComboBox<String> jcomboDono;
     private javax.swing.JComboBox<String> jcomboRaça;
     public javax.swing.JPanel painelForm;
     private javax.swing.JTextField txtAnimal;

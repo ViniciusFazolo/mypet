@@ -6,6 +6,7 @@ package controller;
 
 import java.awt.Frame;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import view.CadastrarAnimal;
@@ -15,7 +16,7 @@ import view.ListaAnimal;
 import view.ListaPessoa;
 import view.ListaProduto;
 import view.Principal;
-import view.RealizaVenda;
+import view.RealizaPedido;
 
 public class ViewController {
     
@@ -26,13 +27,23 @@ public class ViewController {
     private ListaPessoa listPessoa = null;
     private ListaAnimal listAnimal = null;
     private ListaProduto listProduto = null;
-    private RealizaVenda realizaVenda = null;
+    private RealizaPedido realizaVenda = null;
     
 //    Singleton
     private static ViewController myInstance = new ViewController();
+    private DomainController gerdom;
     
     private ViewController(){
-        
+        try {
+            gerdom = new DomainController();
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(principal, "Erro de classe. " + ex.getMessage() );
+            System.exit(0);
+                    
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(principal, "Erro de SQL. " + ex.getMessage() );
+            System.exit(0);
+        }
     }
     
     public static ViewController getMyInstance(){
@@ -83,7 +94,7 @@ public class ViewController {
     }
     
     public void realizarVenda() {
-        realizaVenda = (RealizaVenda) abrirJanela(principal, realizaVenda, RealizaVenda.class);
+        realizaVenda = (RealizaPedido) abrirJanela(principal, realizaVenda, RealizaPedido.class);
     }
 
     public static void main(String[] args) {

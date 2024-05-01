@@ -42,6 +42,10 @@ public class CadastrarCliente extends javax.swing.JDialog {
         txtEmail = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabelaVenda = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MyPet - Cadastrar Cliente");
@@ -77,6 +81,29 @@ public class CadastrarCliente extends javax.swing.JDialog {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setText("Cadastrar Cliente");
 
+        jLabel6.setText("Animais do cliente");
+
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/search.png"))); // NOI18N
+        jToggleButton1.setText("Pesquisar");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
+        tabelaVenda.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nome do Animal", "Registro"
+            }
+        ));
+        jScrollPane2.setViewportView(tabelaVenda);
+
         javax.swing.GroupLayout painelFormLayout = new javax.swing.GroupLayout(painelForm);
         painelForm.setLayout(painelFormLayout);
         painelFormLayout.setHorizontalGroup(
@@ -86,7 +113,7 @@ public class CadastrarCliente extends javax.swing.JDialog {
                 .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelFormLayout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(painelFormLayout.createSequentialGroup()
                         .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4)
@@ -99,14 +126,25 @@ public class CadastrarCliente extends javax.swing.JDialog {
                                 .addComponent(btnSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                             .addComponent(txtCliente)
-                            .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtCelular, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                                .addComponent(txtCpf, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20))))
+                            .addComponent(txtCelular)
+                            .addComponent(txtCpf))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                        .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelFormLayout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelFormLayout.createSequentialGroup()
+                                .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelFormLayout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(2, 2, 2))
+                                    .addComponent(jToggleButton1))
+                                .addGap(304, 304, 304))
+                            .addGroup(painelFormLayout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))))
         );
         painelFormLayout.setVerticalGroup(
             painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,26 +157,33 @@ public class CadastrarCliente extends javax.swing.JDialog {
                     .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(55, 55, 55)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel4)
                 .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelFormLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelFormLayout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30)
+                .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(painelFormLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelFormLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(painelFormLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20))))
         );
@@ -165,6 +210,10 @@ public class CadastrarCliente extends javax.swing.JDialog {
     private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSalvar1ActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,8 +269,12 @@ public class CadastrarCliente extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JToggleButton jToggleButton1;
     public javax.swing.JPanel painelForm;
+    private javax.swing.JTable tabelaVenda;
     private javax.swing.JTextField txtCelular;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtCpf;
