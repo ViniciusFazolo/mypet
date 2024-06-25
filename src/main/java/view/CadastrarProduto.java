@@ -4,6 +4,11 @@
  */
 package view;
 
+import controller.ViewController;
+import domain.Produto;
+import javax.swing.JOptionPane;
+import org.hibernate.HibernateException;
+
 /**
  *
  * @author vinicius
@@ -32,17 +37,9 @@ public class CadastrarProduto extends javax.swing.JDialog {
         btnFechar = new javax.swing.JButton();
         btnSalvar1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        txtproserv = new javax.swing.JTextField();
+        txtDescricao = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtPreco = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtEstoqueInicial = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtEstoqueMaximo = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtDescricao = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jcbEhServico = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
@@ -50,6 +47,11 @@ public class CadastrarProduto extends javax.swing.JDialog {
         setTitle("MyPet - Cadastrar Produto/Serviço");
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnFechar.setText("Fechar");
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -65,24 +67,9 @@ public class CadastrarProduto extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setText("Nome do Produto/Serviço");
+        jLabel1.setText("Descrição");
 
         jLabel2.setText("Preço");
-
-        jLabel3.setText("Estoque Inicial");
-
-        jLabel4.setText("Estoque Máximo");
-
-        jLabel5.setText("Descrição");
-
-        jLabel6.setText("É um serviço?");
-
-        jcbEhServico.setText("Sim");
-        jcbEhServico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbEhServicoActionPerformed(evt);
-            }
-        });
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logosemfundo.png"))); // NOI18N
 
@@ -99,41 +86,26 @@ public class CadastrarProduto extends javax.swing.JDialog {
                     .addGroup(painelFormLayout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelFormLayout.createSequentialGroup()
-                        .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6)
-                        .addGap(226, 226, 226))
                     .addGroup(painelFormLayout.createSequentialGroup()
                         .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtEstoqueMaximo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(txtEstoqueInicial, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPreco, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtproserv, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(painelFormLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20))
-                            .addGroup(painelFormLayout.createSequentialGroup()
-                                .addGap(178, 178, 178)
-                                .addComponent(jcbEhServico)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelFormLayout.createSequentialGroup()
+                                .addComponent(txtPreco, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                .addGap(132, 132, 132))
+                            .addComponent(txtDescricao, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))
                     .addGroup(painelFormLayout.createSequentialGroup()
                         .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
                             .addGroup(painelFormLayout.createSequentialGroup()
                                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(20, 328, Short.MAX_VALUE))))
+                        .addGap(226, 524, Short.MAX_VALUE))))
         );
         painelFormLayout.setVerticalGroup(
             painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,38 +118,16 @@ public class CadastrarProduto extends javax.swing.JDialog {
                     .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54)
-                .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(painelFormLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtproserv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(painelFormLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbEhServico)))
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtEstoqueInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel4)
-                .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(painelFormLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEstoqueMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelFormLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -203,15 +153,28 @@ public class CadastrarProduto extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_btnSalvar1ActionPerformed
 
-    private void jcbEhServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEhServicoActionPerformed
-        if(jcbEhServico.isSelected()){
-            txtEstoqueInicial.setEnabled(false);
-            txtEstoqueMaximo.setEnabled(false);
-        }else{
-            txtEstoqueInicial.setEnabled(true);
-            txtEstoqueMaximo.setEnabled(true);
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        if(txtDescricao.getText().equals("") || txtPreco.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos");
+            return;
         }
-    }//GEN-LAST:event_jcbEhServicoActionPerformed
+        
+        try {
+            Double preco = Double.parseDouble(txtPreco.getText());
+
+            Produto prod = new Produto(txtDescricao.getText(), preco);
+            ViewController.getMyInstance().getDomainInstance().inserir(prod);
+            
+            JOptionPane.showMessageDialog(this, "Inserido com sucesso");
+            txtDescricao.setText("");
+            txtPreco.setText("");
+        } catch (HibernateException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao inserir. " + ex.getMessage());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Digite apenas números.");
+        }
+
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,18 +231,10 @@ public class CadastrarProduto extends javax.swing.JDialog {
     private javax.swing.JButton btnSalvar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JCheckBox jcbEhServico;
     public javax.swing.JPanel painelForm;
     private javax.swing.JTextField txtDescricao;
-    private javax.swing.JTextField txtEstoqueInicial;
-    private javax.swing.JTextField txtEstoqueMaximo;
     private javax.swing.JTextField txtPreco;
-    private javax.swing.JTextField txtproserv;
     // End of variables declaration//GEN-END:variables
 }
