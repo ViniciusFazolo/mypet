@@ -4,18 +4,24 @@
  */
 package view;
 
+import controller.ViewController;
+import domain.Animal;
+import domain.Categoria;
+import java.util.List;
+
 /**
  *
  * @author vinicius
  */
 public class CadastrarAnimal extends javax.swing.JDialog {
-
+    private List<Categoria> categorias;
     /**
      * Creates new form CadastrarCliente
      */
     public CadastrarAnimal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        ViewController.getMyInstance().carregarCombo(jcomboCategoria, Categoria.class);
     }
 
     /**
@@ -30,13 +36,13 @@ public class CadastrarAnimal extends javax.swing.JDialog {
         painelForm = new javax.swing.JPanel();
         btnSalvar = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
-        btnSalvar1 = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtAnimal = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtRegistro = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jcomboRaça = new javax.swing.JComboBox<>();
+        jcomboCategoria = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -46,6 +52,11 @@ public class CadastrarAnimal extends javax.swing.JDialog {
         painelForm.setBackground(new java.awt.Color(239, 239, 239));
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnFechar.setText("Fechar");
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -54,10 +65,10 @@ public class CadastrarAnimal extends javax.swing.JDialog {
             }
         });
 
-        btnSalvar1.setText("Excluir");
-        btnSalvar1.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvar1ActionPerformed(evt);
+                btnExcluirActionPerformed(evt);
             }
         });
 
@@ -67,7 +78,11 @@ public class CadastrarAnimal extends javax.swing.JDialog {
 
         jLabel6.setText("Categoria");
 
-        jcomboRaça.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vinicius", "Pedro" }));
+        jcomboCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcomboCategoriaActionPerformed(evt);
+            }
+        });
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logosemfundo.png"))); // NOI18N
 
@@ -87,12 +102,12 @@ public class CadastrarAnimal extends javax.swing.JDialog {
                     .addGroup(painelFormLayout.createSequentialGroup()
                         .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jcomboRaça, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcomboCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
                             .addGroup(painelFormLayout.createSequentialGroup()
                                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -115,7 +130,7 @@ public class CadastrarAnimal extends javax.swing.JDialog {
                 .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -127,7 +142,7 @@ public class CadastrarAnimal extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jcomboRaça, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcomboCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(216, Short.MAX_VALUE))
         );
 
@@ -150,10 +165,25 @@ public class CadastrarAnimal extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_btnFecharActionPerformed
 
-    private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar1ActionPerformed
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalvar1ActionPerformed
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
+    private void jcomboCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcomboCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcomboCategoriaActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+//         try {
+//             Animal ani = new Animal(txtRegistro.getTex);
+//             ViewController.getMyInstance().getDomainInstance().inserir(cat);
+//            
+//            JOptionPane.showMessageDialog(this, "Inserido com sucesso");
+//            txtDescricao.setText("");
+//        } catch (HibernateException ex) {
+//            JOptionPane.showMessageDialog(this, "Erro ao inserir. " + ex.getMessage());
+//        };
+    }//GEN-LAST:event_btnSalvarActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -204,15 +234,15 @@ public class CadastrarAnimal extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton btnSalvar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JComboBox<String> jcomboRaça;
+    private javax.swing.JComboBox<String> jcomboCategoria;
     public javax.swing.JPanel painelForm;
     private javax.swing.JTextField txtAnimal;
     private javax.swing.JTextField txtRegistro;

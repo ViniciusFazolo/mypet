@@ -59,12 +59,12 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jcomboRaça" alignment="0" min="-2" pref="245" max="-2" attributes="0"/>
+                              <Component id="jcomboCategoria" alignment="0" min="-2" pref="245" max="-2" attributes="0"/>
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="btnSalvar" min="-2" pref="80" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnSalvar1" min="-2" pref="80" max="-2" attributes="0"/>
+                                  <Component id="btnExcluir" min="-2" pref="80" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnFechar" min="-2" pref="80" max="-2" attributes="0"/>
                               </Group>
@@ -94,7 +94,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnSalvar" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="btnFechar" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="btnSalvar1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btnExcluir" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -107,7 +107,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jcomboRaça" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="jcomboCategoria" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace pref="216" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -118,6 +118,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Salvar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnFechar">
           <Properties>
@@ -127,12 +130,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFecharActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnSalvar1">
+        <Component class="javax.swing.JButton" name="btnExcluir">
           <Properties>
             <Property name="text" type="java.lang.String" value="Excluir"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvar1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
@@ -154,15 +157,15 @@
             <Property name="text" type="java.lang.String" value="Categoria"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jcomboRa&#xe7;a">
+        <Component class="javax.swing.JComboBox" name="jcomboCategoria">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="Vinicius"/>
-                <StringItem index="1" value="Pedro"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcomboCategoriaActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
