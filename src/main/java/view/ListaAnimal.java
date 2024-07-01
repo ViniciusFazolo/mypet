@@ -4,7 +4,10 @@
  */
 package view;
 
-import controller.ViewController;
+import controller.AnimalAbstractTableModel;
+import controller.ViewControlador;
+import domain.Animal;
+import java.util.List;
 
 /**
  *
@@ -12,6 +15,8 @@ import controller.ViewController;
  */
 public class ListaAnimal extends javax.swing.JDialog {
 
+    private AnimalAbstractTableModel animalTableAbstract;
+    private List<Animal> animais;
     /**
      * Creates new form ListarDefault
      */
@@ -19,6 +24,10 @@ public class ListaAnimal extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
+        animalTableAbstract = new AnimalAbstractTableModel();
+        animais = ViewControlador.getMyInstance().getDomainInstance().listar(Animal.class);
+        animalTableAbstract.setLista(animais);
+        tableListagem.setModel(animalTableAbstract);
     }
 
     /**
@@ -31,8 +40,6 @@ public class ListaAnimal extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnNovo = new javax.swing.JButton();
-        btnFechar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableListagem = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -40,26 +47,12 @@ public class ListaAnimal extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MyPet - Listagem de Animais");
 
-        btnNovo.setText("Novo Animal");
-        btnNovo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoActionPerformed(evt);
-            }
-        });
-
-        btnFechar.setText("Fechar");
-        btnFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFecharActionPerformed(evt);
-            }
-        });
-
         tableListagem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nome", "Registro", "Dono", "Raça"
+
             }
         ));
         jScrollPane1.setViewportView(tableListagem);
@@ -75,11 +68,7 @@ public class ListaAnimal extends javax.swing.JDialog {
                 .addContainerGap(26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnNovo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -87,11 +76,7 @@ public class ListaAnimal extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
         );
@@ -109,14 +94,6 @@ public class ListaAnimal extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
-        dispose();
-    }//GEN-LAST:event_btnFecharActionPerformed
-
-    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        ViewController.getMyInstance().abrirCadCliente();
-    }//GEN-LAST:event_btnNovoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,8 +141,6 @@ public class ListaAnimal extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    protected javax.swing.JButton btnFechar;
-    protected javax.swing.JButton btnNovo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
