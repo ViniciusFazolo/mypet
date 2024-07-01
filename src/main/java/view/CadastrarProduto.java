@@ -4,7 +4,7 @@
  */
 package view;
 
-import controller.ViewController;
+import controller.ViewControlador;
 import domain.Produto;
 import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
@@ -34,8 +34,6 @@ public class CadastrarProduto extends javax.swing.JDialog {
 
         painelForm = new javax.swing.JPanel();
         btnSalvar = new javax.swing.JButton();
-        btnFechar = new javax.swing.JButton();
-        btnSalvar1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -50,20 +48,6 @@ public class CadastrarProduto extends javax.swing.JDialog {
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
-            }
-        });
-
-        btnFechar.setText("Fechar");
-        btnFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFecharActionPerformed(evt);
-            }
-        });
-
-        btnSalvar1.setText("Excluir");
-        btnSalvar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvar1ActionPerformed(evt);
             }
         });
 
@@ -99,13 +83,8 @@ public class CadastrarProduto extends javax.swing.JDialog {
                         .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
-                            .addGroup(painelFormLayout.createSequentialGroup()
-                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(226, 524, Short.MAX_VALUE))))
+                            .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(398, 696, Short.MAX_VALUE))))
         );
         painelFormLayout.setVerticalGroup(
             painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,10 +92,7 @@ public class CadastrarProduto extends javax.swing.JDialog {
                 .addGap(27, 27, 27)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
-                .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -145,14 +121,6 @@ public class CadastrarProduto extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnFecharActionPerformed
-
-    private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar1ActionPerformed
-        dispose();
-    }//GEN-LAST:event_btnSalvar1ActionPerformed
-
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if(txtDescricao.getText().equals("") || txtPreco.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Preencha todos os campos");
@@ -163,7 +131,7 @@ public class CadastrarProduto extends javax.swing.JDialog {
             Double preco = Double.parseDouble(txtPreco.getText());
 
             Produto prod = new Produto(txtDescricao.getText(), preco);
-            ViewController.getMyInstance().getDomainInstance().inserir(prod);
+            ViewControlador.getMyInstance().getDomainInstance().inserir(prod);
             
             JOptionPane.showMessageDialog(this, "Inserido com sucesso");
             txtDescricao.setText("");
@@ -226,9 +194,7 @@ public class CadastrarProduto extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton btnSalvar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
