@@ -54,6 +54,11 @@ public class CadastrarAnimal extends javax.swing.JDialog {
                 formComponentShown(evt);
             }
         });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         painelForm.setBackground(new java.awt.Color(239, 239, 239));
         painelForm.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -194,6 +199,10 @@ public class CadastrarAnimal extends javax.swing.JDialog {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
     }//GEN-LAST:event_formComponentShown
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        limparcampos();
+    }//GEN-LAST:event_formWindowClosing
            
     private void limparcampos(){
         txtRegistro.setText("");

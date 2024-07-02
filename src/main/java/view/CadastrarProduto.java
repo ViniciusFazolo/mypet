@@ -43,6 +43,11 @@ public class CadastrarProduto extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MyPet - Cadastrar Produto/Serviço");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -144,6 +149,14 @@ public class CadastrarProduto extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnSalvarActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        limparcampos();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void limparcampos(){
+        txtDescricao.setText("");
+        txtPreco.setText("");
+    }
     /**
      * @param args the command line arguments
      */
