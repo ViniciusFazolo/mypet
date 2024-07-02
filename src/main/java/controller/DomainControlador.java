@@ -8,6 +8,7 @@ import dao.ConexaoHibernate;
 import dao.GenericDAO;
 import domain.Cliente;
 import domain.Pedido;
+import domain.Produto_Pedido;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -34,10 +35,15 @@ public class DomainControlador {
         return genDao.listar(classe);
     }
 
-     public int inserirPedido(Cliente cli, List listaItens) {
+     public int inserirPedido(Cliente cli, List<Produto_Pedido> listaItens) {
         Pedido ped = new Pedido(0.0, new Date(), cli, listaItens);
         ped.calcularValorTotal();
         genDao.inserir(ped);
+        
+        for(Produto_Pedido item : listaItens){
+            genDao.inserir(item);
+        }
+        
         return ped.getId();             
      }
 }

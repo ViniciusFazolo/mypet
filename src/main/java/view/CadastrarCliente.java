@@ -212,7 +212,7 @@ public class CadastrarCliente extends javax.swing.JDialog {
             limparcampos();
         } catch (HibernateException ex) {
             JOptionPane.showMessageDialog(this, "Erro ao inserir. Pode ser que esteja tentando inserir um CPF já cadastrado");
-        };
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
