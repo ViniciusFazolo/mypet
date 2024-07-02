@@ -85,7 +85,7 @@ public class Principal extends javax.swing.JFrame {
         });
         menuCliente.add(cadastrarCliente);
 
-        listarCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        listarCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         listarCliente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         listarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/listar.png"))); // NOI18N
         listarCliente.setText("Listar Clientes");
@@ -113,7 +113,7 @@ public class Principal extends javax.swing.JFrame {
         menuProduto.setText("Produto");
         menuProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        cadastrarProduto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        cadastrarProduto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_DOWN_MASK));
         cadastrarProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cadastrarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/produto.png"))); // NOI18N
         cadastrarProduto.setText("Cadastrar Produto");
@@ -124,7 +124,7 @@ public class Principal extends javax.swing.JFrame {
         });
         menuProduto.add(cadastrarProduto);
 
-        listarProduto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        listarProduto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         listarProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         listarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/listar.png"))); // NOI18N
         listarProduto.setText("Listar Produtos");
@@ -141,7 +141,7 @@ public class Principal extends javax.swing.JFrame {
         menuAnimal.setText("Animal");
         menuAnimal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        cadastrarAnimal.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        cadastrarAnimal.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_DOWN_MASK));
         cadastrarAnimal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cadastrarAnimal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cachorro.png"))); // NOI18N
         cadastrarAnimal.setText("Cadastrar Animal");
@@ -152,7 +152,7 @@ public class Principal extends javax.swing.JFrame {
         });
         menuAnimal.add(cadastrarAnimal);
 
-        listarAnimal.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        listarAnimal.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         listarAnimal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         listarAnimal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/listar.png"))); // NOI18N
         listarAnimal.setText("Listar Animais");

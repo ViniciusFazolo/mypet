@@ -211,7 +211,7 @@ public class CadastrarCliente extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Inserido com sucesso");
             limparcampos();
         } catch (HibernateException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao inserir. " + ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro ao inserir. Pode ser que esteja tentando inserir um CPF já cadastrado");
         };
     }//GEN-LAST:event_btnSalvarActionPerformed
 

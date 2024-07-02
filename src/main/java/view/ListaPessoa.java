@@ -136,7 +136,7 @@ public class ListaPessoa extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSelecionarActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-       clientes = ViewControlador.getMyInstance().getDomainInstance().listar(Cliente.class);
+        clientes = ViewControlador.getMyInstance().getDomainInstance().listar(Cliente.class);
         cliTableModel.setLista(clientes);
         tableListagem.setModel(cliTableModel);
     }//GEN-LAST:event_formComponentShown

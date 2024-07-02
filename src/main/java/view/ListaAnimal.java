@@ -46,6 +46,11 @@ public class ListaAnimal extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MyPet - Listagem de Animais");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         tableListagem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,6 +99,12 @@ public class ListaAnimal extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        animais = ViewControlador.getMyInstance().getDomainInstance().listar(Animal.class);
+        animalTableAbstract.setLista(animais);
+        tableListagem.setModel(animalTableAbstract);
+    }//GEN-LAST:event_formComponentShown
 
     /**
      * @param args the command line arguments
