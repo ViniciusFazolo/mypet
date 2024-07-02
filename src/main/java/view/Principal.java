@@ -4,7 +4,8 @@
  */
 package view;
 
-import controller.ViewController;
+import controller.ViewControlador;
+import domain.Cliente;
 import javax.swing.JFrame;
 
 /**
@@ -181,32 +182,32 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cadastrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarClienteActionPerformed
-        ViewController.getMyInstance().abrirCadCliente();
+        ViewControlador.getMyInstance().abrirCadCliente();
     }//GEN-LAST:event_cadastrarClienteActionPerformed
 
     private void cadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarProdutoActionPerformed
-        ViewController.getMyInstance().abrirCadProduto();
+        ViewControlador.getMyInstance().abrirCadProduto();
     }//GEN-LAST:event_cadastrarProdutoActionPerformed
 
-    private void listarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarClienteActionPerformed
-        ViewController.getMyInstance().abrirListaPessoa();
-    }//GEN-LAST:event_listarClienteActionPerformed
-
     private void cadastrarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarAnimalActionPerformed
-        ViewController.getMyInstance().abrirCadAnimal();
+        ViewControlador.getMyInstance().abrirCadAnimal();
     }//GEN-LAST:event_cadastrarAnimalActionPerformed
 
+    private void realizarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarVendaActionPerformed
+        ViewControlador.getMyInstance().realizarVenda();
+    }//GEN-LAST:event_realizarVendaActionPerformed
+
     private void listarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarAnimalActionPerformed
-        ViewController.getMyInstance().abrirListaAnimal();
+        ViewControlador.getMyInstance().abrirListaAnimal();
     }//GEN-LAST:event_listarAnimalActionPerformed
 
     private void listarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarProdutoActionPerformed
-        ViewController.getMyInstance().abrirListaProduto();
+        ViewControlador.getMyInstance().abrirListaProduto();
     }//GEN-LAST:event_listarProdutoActionPerformed
 
-    private void realizarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarVendaActionPerformed
-        ViewController.getMyInstance().realizarVenda();
-    }//GEN-LAST:event_realizarVendaActionPerformed
+    private void listarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarClienteActionPerformed
+        ViewControlador.getMyInstance().abrirListaPessoa();
+    }//GEN-LAST:event_listarClienteActionPerformed
 
     /**
      * @param args the command line arguments

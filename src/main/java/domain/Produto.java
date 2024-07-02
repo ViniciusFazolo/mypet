@@ -11,7 +11,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Transient;
 import java.util.List;
 
 /**
@@ -25,20 +24,46 @@ public class Produto {
     private Integer id;
     
     @Column(length = 100)
-    private String nome;
+    private String descricao;
     
     @Column(precision = 2)
     private Double preco;
     
-    private Integer estoqueInicial;
-    private Integer estoqueMaximo;
+    public Produto(String descricao, Double preco) {
+        this.descricao = descricao;
+        this.preco = preco;
+    }
+
+    public Produto() {
+    }
     
-    @Column(length = 100)
-    private String descricao;
-    
-    private Boolean ehServico;
-    
-    @OneToMany(mappedBy = "chComposta.produto", fetch = FetchType.LAZY)
-    private List<Produto_Pedido> itensPedido;
-    
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    @Override
+    public String toString() {
+        return getDescricao();
+    }
 }

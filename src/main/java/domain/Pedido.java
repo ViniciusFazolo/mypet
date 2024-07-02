@@ -15,7 +15,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.persistence.Transient;
 import java.util.Date;
 import java.util.List;
 
@@ -41,4 +40,75 @@ public class Pedido {
     
     @OneToMany(mappedBy = "chComposta.pedido", fetch = FetchType.LAZY)
     private List<Produto_Pedido> itensPedido;
+
+    public Pedido() {
+    }
+
+    public Pedido(Double valorTotal, Date dataPedido, Cliente cliente, List<Produto_Pedido> itensPedido) {
+        this.valorTotal = valorTotal;
+        this.dataPedido = dataPedido;
+        this.cliente = cliente;
+        this.itensPedido = itensPedido;
+    }
+    
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(Double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public Date getDataPedido() {
+        return dataPedido;
+    }
+
+    public void setDataPedido(Date dataPedido) {
+        this.dataPedido = dataPedido;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<Produto_Pedido> getItensPedido() {
+        return itensPedido;
+    }
+
+    public void setItensPedido(List<Produto_Pedido> itensPedido) {
+        this.itensPedido = itensPedido;
+    }
+    
+    public double calcularValorTotal(){
+        valorTotal = 0.0;
+        
+        for(Produto_Pedido item : itensPedido ) {
+            double preco = item.getChComposta().getProduto().getPreco();
+            int qtde = item.getQtd();
+            valorTotal = valorTotal + qtde * preco;
+            
+            item.setPedido(this);
+        }
+        return valorTotal;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido{" + "id=" + id + ", valorTotal=" + valorTotal + ", dataPedido=" + dataPedido + ", cliente=" + cliente + ", itensPedido=" + itensPedido + '}';
+    }
+    
+    
+    
 }

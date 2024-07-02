@@ -4,6 +4,20 @@
  */
 package view;
 
+import controller.ItemPedidoAbstractTableModel;
+import controller.ViewControlador;
+import domain.Animal;
+import domain.Cliente;
+import domain.Produto;
+import domain.Produto_Pedido;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author vinicius
@@ -13,9 +27,19 @@ public class RealizaPedido extends javax.swing.JDialog {
     /**
      * Creates new form RealizaVenda
      */
+    private Cliente clienteSelecionado;
+    private ItemPedidoAbstractTableModel itemPedidoTM = null;
+
     public RealizaPedido(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        itemPedidoTM = new ItemPedidoAbstractTableModel();
+        tabelaVenda.setModel(itemPedidoTM);
+        clienteSelecionado = null;
+        
+        //formata saida para dinheiro
+        formataDinheiro();    
     }
 
     /**
@@ -31,22 +55,34 @@ public class RealizaPedido extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
-        btnFechar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtCliente = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        scrollpaneProduto = new javax.swing.JScrollPane();
-        listProduto = new javax.swing.JList<>();
         btnAdd = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelaVenda = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         labelPreco = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jProduto = new javax.swing.JComboBox<>();
+        jPesquisarCliente = new javax.swing.JToggleButton();
+        jAnimal = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jQtd = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        qtdTotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MyPet - Realizar Venda");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Realizar Pedido");
@@ -54,38 +90,39 @@ public class RealizaPedido extends javax.swing.JDialog {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logosemfundo.png"))); // NOI18N
 
         btnSalvar.setText("Finalizar Venda");
-
-        btnFechar.setText("Fechar");
-        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFecharActionPerformed(evt);
+                btnSalvarActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Cliente");
 
-        jLabel4.setText("Produto/Serviço");
-
-        listProduto.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        txtCliente.setEnabled(false);
+        txtCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtClienteActionPerformed(evt);
+            }
         });
-        scrollpaneProduto.setViewportView(listProduto);
 
         btnAdd.setText("Adicionar");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Animal");
 
         tabelaVenda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Produto/Serviço", "Preço"
+
             }
         ));
         jScrollPane2.setViewportView(tabelaVenda);
@@ -93,7 +130,34 @@ public class RealizaPedido extends javax.swing.JDialog {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel9.setText("Preço a ser pago:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jProdutoActionPerformed(evt);
+            }
+        });
+
+        jPesquisarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/search.png"))); // NOI18N
+        jPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPesquisarClienteActionPerformed(evt);
+            }
+        });
+
+        jAnimal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAnimalActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Produto/Serviço");
+
+        jQtd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jQtdActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Quantidade");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,27 +168,11 @@ public class RealizaPedido extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnSalvar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jComboBox1, 0, 300, Short.MAX_VALUE)
-                                    .addComponent(txtCliente))
-                                .addGap(54, 54, 54)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnAdd)
-                                    .addComponent(jLabel4)
-                                    .addComponent(scrollpaneProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(250, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(qtdTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -132,7 +180,32 @@ public class RealizaPedido extends javax.swing.JDialog {
                                 .addGap(19, 19, 19))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(labelPreco)
-                                .addGap(0, 246, Short.MAX_VALUE))))))
+                                .addGap(0, 246, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSalvar)
+                            .addComponent(jLabel1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel6)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(71, 71, 71)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnAdd)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,38 +213,41 @@ public class RealizaPedido extends javax.swing.JDialog {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
+                    .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jQtd, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(txtCliente)
+                    .addComponent(jPesquisarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1))
-                    .addComponent(scrollpaneProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(6, 6, 6)
+                        .addComponent(jAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelPreco, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(qtdTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAdd)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(labelPreco))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel9)
-                        .addGap(28, 28, 28))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                                .addGap(68, 68, 68)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -188,10 +264,116 @@ public class RealizaPedido extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
-        dispose();
-    }//GEN-LAST:event_btnFecharActionPerformed
+    private void jPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPesquisarClienteActionPerformed
+        clienteSelecionado = ViewControlador.getMyInstance().abrirListaPessoa();
+        if (clienteSelecionado != null) {
+            txtCliente.setText(clienteSelecionado.getNome());
 
+            List<Animal> animais = ViewControlador.getMyInstance().getDomainInstance().listar(Animal.class);
+            List<Animal> animaisDono = new ArrayList<>();
+
+            for (Animal animal : animais) {
+                if (animal.getDono().getId().equals(clienteSelecionado.getId())) {
+                    animaisDono.add(animal);
+                }
+            }
+
+            ViewControlador.getMyInstance().carregarComboById(jAnimal, animaisDono);
+        } else {
+            txtCliente.setText("");
+        }
+    }//GEN-LAST:event_jPesquisarClienteActionPerformed
+
+    private void jAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAnimalActionPerformed
+
+    }//GEN-LAST:event_jAnimalActionPerformed
+
+    private void txtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClienteActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        ViewControlador.getMyInstance().carregarCombo(jProduto, Produto.class);
+    }//GEN-LAST:event_formComponentShown
+
+    private void jProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jProdutoActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        Produto prod = (Produto) jProduto.getSelectedItem();
+        int qtd;
+
+        try {
+            qtd = Integer.parseInt(jQtd.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Digite apenas números na quantidade.", "Cadastro de Venda", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        List<Produto_Pedido> itens;
+        itens = itemPedidoTM.getLista();
+
+        // verifica se está sendo adicionado o mesmo item na tabela de itens do pedido        
+        for (Produto_Pedido item : itens) {
+            if (item.getChComposta().getProduto().getDescricao().equals(prod.getDescricao())) {
+                JOptionPane.showMessageDialog(this, "Esse item já foi inserido");
+                return;
+            }
+        }
+
+        Produto_Pedido pp = new Produto_Pedido(qtd, null, prod);
+        itemPedidoTM.adicionar(pp);
+        
+        atualizaTotal(qtd, prod.getPreco());
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void jQtdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jQtdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jQtdActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        if (itemPedidoTM.getRowCount() > 0 && !txtCliente.getText().isEmpty() && !jQtd.getText().isEmpty()) {
+            int id = ViewControlador.getMyInstance().getDomainInstance().inserirPedido(clienteSelecionado, itemPedidoTM.getLista());
+            JOptionPane.showMessageDialog(this, "Venda " + id + " inserido com sucesso.", "Cadastro Venda", JOptionPane.INFORMATION_MESSAGE);
+
+            limparTela();
+        } else {
+            // Mensagem de erro            
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos");
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        limparTela();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void limparTela(){
+        clienteSelecionado = null;
+        txtCliente.setText("");
+        jAnimal.removeAllItems();
+        jQtd.setText("");
+        itemPedidoTM.setLista(null);
+        formataDinheiro();
+    }
+    
+    private void formataDinheiro(){
+        String output = DecimalFormat.getCurrencyInstance().format( 0.0 );
+        qtdTotal.setText( output );
+    }
+    
+    private void atualizaTotal(int qtd, double valor){
+        double total;
+        try {
+            total = DecimalFormat.getCurrencyInstance().parse( qtdTotal.getText() ).doubleValue();
+            total = total + qtd * valor;
+            String totalConvertido = DecimalFormat.getCurrencyInstance().format( total );
+            qtdTotal.setText(totalConvertido);
+        } catch (ParseException ex) {
+            Logger.getLogger(RealizaPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -237,20 +419,22 @@ public class RealizaPedido extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jAnimal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JToggleButton jPesquisarCliente;
+    private javax.swing.JComboBox<String> jProduto;
+    private javax.swing.JTextField jQtd;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelPreco;
-    private javax.swing.JList<String> listProduto;
-    private javax.swing.JScrollPane scrollpaneProduto;
+    private javax.swing.JLabel qtdTotal;
     private javax.swing.JTable tabelaVenda;
     private javax.swing.JTextField txtCliente;
     // End of variables declaration//GEN-END:variables

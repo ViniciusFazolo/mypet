@@ -6,13 +6,11 @@ package domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Transient;
 /**
  *
  * @author vinicius
@@ -27,10 +25,55 @@ public class Animal {
     private String registro;
     
     @ManyToOne
-    @JoinColumn(name = "idCategoria")
-    private Categoria categoria;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idCliente")
+    @JoinColumn(name = "idDono", nullable = false)
     private Cliente dono;
+    
+    @Column(length = 50, nullable = false)
+    private String nome;
+
+    public Animal(String registro, Cliente dono, String nome) {
+        this.registro = registro;
+        this.dono = dono;
+        this.nome = nome;
+    }
+
+    public Animal() {
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Cliente getDono() {
+        return dono;
+    }
+
+    public void setDono(Cliente dono) {
+        this.dono = dono;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getRegistro() {
+        return registro;
+    }
+
+    public void setRegistro(String registro) {
+        this.registro = registro;
+    }
+
+    @Override
+    public String toString() {
+        return getNome();
+    }
 }
