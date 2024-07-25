@@ -46,4 +46,8 @@ public class DomainControlador {
         
         return ped.getId();             
      }
+     
+     public void excluir(Object obj){
+        genDao.excluir(obj);
+     }
 }

@@ -69,7 +69,7 @@ public class ProdutoAbstractTableModel extends AbstractTableModel {
         
     }
 
-    public Produto getCliente(int linha) {
+    public Produto getProduto(int linha) {
         return listaItens.get(linha);
     }
     

@@ -71,7 +71,7 @@ public class AnimalAbstractTableModel extends AbstractTableModel {
         
     }
 
-    public Animal getCliente(int linha) {
+    public Animal getAnimal(int linha) {
         return listaItens.get(linha);
     }
     
