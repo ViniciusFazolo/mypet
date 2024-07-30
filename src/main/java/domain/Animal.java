@@ -31,6 +31,13 @@ public class Animal {
     @Column(length = 50, nullable = false)
     private String nome;
 
+    public Animal(Integer id, String registro, Cliente dono, String nome) {
+        this.id = id;
+        this.registro = registro;
+        this.dono = dono;
+        this.nome = nome;
+    }
+
     public Animal(String registro, Cliente dono, String nome) {
         this.registro = registro;
         this.dono = dono;
