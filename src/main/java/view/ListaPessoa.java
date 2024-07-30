@@ -54,13 +54,21 @@ public class ListaPessoa extends javax.swing.JDialog {
         tableListagem = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnSelecionar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        excluir = new javax.swing.JButton();
+        editar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MyPet - Listagem de Pessoas");
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
+            }
+        });
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
             }
         });
 
@@ -85,10 +93,17 @@ public class ListaPessoa extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("Excluir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        excluir.setText("Excluir");
+        excluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                excluirActionPerformed(evt);
+            }
+        });
+
+        editar.setText("Editar");
+        editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarActionPerformed(evt);
             }
         });
 
@@ -102,7 +117,9 @@ public class ListaPessoa extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnSelecionar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(excluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editar))
                     .addComponent(jLabel1)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
@@ -115,7 +132,8 @@ public class ListaPessoa extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSelecionar)
-                    .addComponent(jButton1))
+                    .addComponent(excluir)
+                    .addComponent(editar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
@@ -154,7 +172,7 @@ public class ListaPessoa extends javax.swing.JDialog {
         tableListagem.setModel(cliTableModel);
     }//GEN-LAST:event_formComponentShown
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluirActionPerformed
         int linha = tableListagem.getSelectedRow();
         if ( linha >= 0 ) {
             
@@ -177,7 +195,27 @@ public class ListaPessoa extends javax.swing.JDialog {
             // Mensagem de erro
             JOptionPane.showMessageDialog(this,"Selecione uma linha da tabela.", "Pesquisar cliente", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_excluirActionPerformed
+
+    private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
+        // TODO add your handling code here:
+        int linha = tableListagem.getSelectedRow();
+        if ( linha >= 0 ) {
+            linha = tableListagem.convertRowIndexToModel(linha);
+            cliSelecionado = cliTableModel.getCliente(linha);
+            ViewControlador.getMyInstance().setClienteEdicao(cliSelecionado);
+            ViewControlador.getMyInstance().abrirCadCliente();
+        } else {
+            // Mensagem de erro
+            JOptionPane.showMessageDialog(this,"Selecione uma linha da tabela.", "Pesquisar cliente", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_editarActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        clientes = ViewControlador.getMyInstance().getDomainInstance().listar(Cliente.class);
+        cliTableModel.setLista(clientes);
+        tableListagem.setModel(cliTableModel);
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
@@ -224,7 +262,8 @@ public class ListaPessoa extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSelecionar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton editar;
+    private javax.swing.JButton excluir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
