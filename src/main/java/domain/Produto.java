@@ -28,6 +28,12 @@ public class Produto {
     
     @Column(precision = 2)
     private Double preco;
+
+    public Produto(Integer id, String descricao, Double preco) {
+        this.id = id;
+        this.descricao = descricao;
+        this.preco = preco;
+    }
     
     public Produto(String descricao, Double preco) {
         this.descricao = descricao;

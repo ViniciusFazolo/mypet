@@ -15,6 +15,8 @@ import org.hibernate.HibernateException;
  */
 public class CadastrarProduto extends javax.swing.JDialog {
 
+    private Produto produtoEdicao;
+
     /**
      * Creates new form CadastrarCliente
      */
@@ -39,10 +41,15 @@ public class CadastrarProduto extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         txtPreco = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        titulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MyPet - Cadastrar Produto/Serviço");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -62,8 +69,7 @@ public class CadastrarProduto extends javax.swing.JDialog {
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logosemfundo.png"))); // NOI18N
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel8.setText("Cadastrar Produto");
+        titulo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout painelFormLayout = new javax.swing.GroupLayout(painelForm);
         painelForm.setLayout(painelFormLayout);
@@ -73,7 +79,7 @@ public class CadastrarProduto extends javax.swing.JDialog {
                 .addGap(24, 24, 24)
                 .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelFormLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
+                        .addComponent(titulo)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(painelFormLayout.createSequentialGroup()
                         .addGroup(painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -95,7 +101,7 @@ public class CadastrarProduto extends javax.swing.JDialog {
             painelFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelFormLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jLabel8)
+                .addComponent(titulo)
                 .addGap(18, 18, 18)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
@@ -106,7 +112,7 @@ public class CadastrarProduto extends javax.swing.JDialog {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -127,36 +133,75 @@ public class CadastrarProduto extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        if(txtDescricao.getText().equals("") || txtPreco.getText().equals("")){
+        String descricao = txtDescricao.getText();
+        String precoString = txtPreco.getText();
+        
+        if (descricao.isEmpty() || precoString.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Preencha todos os campos");
             return;
         }
-        
-        try {
-            Double preco = Double.parseDouble(txtPreco.getText());
 
-            Produto prod = new Produto(txtDescricao.getText(), preco);
-            ViewControlador.getMyInstance().getDomainInstance().inserir(prod);
-            
-            JOptionPane.showMessageDialog(this, "Inserido com sucesso");
-            txtDescricao.setText("");
-            txtPreco.setText("");
-        } catch (HibernateException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao inserir. " + ex.getMessage());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Digite apenas números.");
+        if (produtoEdicao != null) {
+            try {
+                Double preco = Double.parseDouble(precoString);
+
+                Produto prod = new Produto(produtoEdicao.getId(), descricao, preco);
+                ViewControlador.getMyInstance().getDomainInstance().alterar(prod);
+
+                JOptionPane.showMessageDialog(this, "Inserido com sucesso");
+                
+            } catch (HibernateException ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao inserir. " + ex.getMessage());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Digite apenas números.");
+            }
+        } else {
+            try {
+                Double preco = Double.parseDouble(txtPreco.getText());
+
+                Produto prod = new Produto(descricao, preco);
+                ViewControlador.getMyInstance().getDomainInstance().inserir(prod);
+
+                JOptionPane.showMessageDialog(this, "Inserido com sucesso");
+                limparcampos();
+            } catch (HibernateException ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao inserir. " + ex.getMessage());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Digite apenas números.");
+            }
         }
+
 
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         limparcampos();
+
+        if (produtoEdicao != null) {
+            ViewControlador.getMyInstance().setProdutoEdicao(null);
+        }
     }//GEN-LAST:event_formWindowClosing
 
-    private void limparcampos(){
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        if (ViewControlador.getMyInstance().getProdutoEdicao() != null) {
+            titulo.setText("Editar Produto");
+            produtoEdicao = ViewControlador.getMyInstance().getProdutoEdicao();
+            carregaDadosEdicao(produtoEdicao);
+        } else {
+            titulo.setText("Cadastrar Produto");
+        }
+    }//GEN-LAST:event_formComponentShown
+
+    private void limparcampos() {
         txtDescricao.setText("");
         txtPreco.setText("");
     }
+
+    public void carregaDadosEdicao(Produto prod) {
+        txtDescricao.setText(prod.getDescricao());
+        txtPreco.setText(prod.getPreco().toString());
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -211,8 +256,8 @@ public class CadastrarProduto extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     public javax.swing.JPanel painelForm;
+    private javax.swing.JLabel titulo;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtPreco;
     // End of variables declaration//GEN-END:variables
